@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ role }} Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; min-height: 100vh; color: #fff;
+           background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 50%, #0f1b4d 100%);
+           display: flex; justify-content: center; align-items: center; }
+    .box { background: rgba(20,20,40,0.92); padding: 36px; border-radius: 14px;
+           border: 1px solid #5b3fd1; box-shadow: 0 0 30px rgba(110,70,230,0.45);
+           text-align: center; width: 420px; }
+    h1 { background: linear-gradient(90deg, #a78bfa, #60a5fa);
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .denied { background: #3b1230; color: #ff8aa8; border: 1px solid #a8325a; padding: 10px;
+              border-radius: 8px; font-size: 14px; margin: 14px 0; }
+    a { display: inline-block; margin-top: 20px; padding: 10px 24px; color: #fff;
+        text-decoration: none; border-radius: 8px;
+        background: linear-gradient(90deg, #7c3aed, #2563eb); }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>{{ role }} Dashboard</h1>
+    <p>Welcome, {{ username }}</p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<div class="denied">{{ messages[0] }}</div>{% endif %}
+    {% endwith %}
+    <a href="/logout">Logout</a>
+  </div>
+</body>
+</html>

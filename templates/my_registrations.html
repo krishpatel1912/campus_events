@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Registrations</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; min-height: 100vh; color: #fff; padding: 40px;
+           background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 50%, #0f1b4d 100%); }
+    .wrap { max-width: 1000px; margin: 0 auto; background: rgba(20,20,40,0.92); padding: 30px;
+            border-radius: 14px; border: 1px solid #5b3fd1; box-shadow: 0 0 30px rgba(110,70,230,0.45); }
+    h1 { margin: 0 0 4px; background: linear-gradient(90deg, #a78bfa, #60a5fa);
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .welcome { color: #8b93b8; margin-bottom: 18px; }
+    .btn { display: inline-block; padding: 8px 18px; color: #fff; text-decoration: none; border-radius: 8px;
+           background: linear-gradient(90deg, #7c3aed, #2563eb); margin-right: 8px; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 22px; }
+    th { background: #2a2370; padding: 10px; text-align: left; font-size: 14px; }
+    td { padding: 10px; border-bottom: 1px solid #2f2f5a; font-size: 14px; }
+    .empty { color: #8b93b8; margin-top: 22px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>My Registrations</h1>
+    <div class="welcome">Student: {{ username }}</div>
+    <a class="btn" href="/student">Back to dashboard</a>
+    <a class="btn" href="/logout">Logout</a>
+
+    {% if rows %}
+    <table>
+      <tr><th>Event</th><th>Date</th><th>Venue</th><th>Ticket Number</th><th>Status</th><th>Registered On</th></tr>
+      {% for r in rows %}
+      <tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td><td>{{ r[5] }}</td></tr>
+      {% endfor %}
+    </table>
+    {% else %}
+      <div class="empty">You have not registered for any event yet.</div>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Event</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 0; min-height: 100vh; color: #fff;
+           display: flex; justify-content: center; align-items: center; padding: 30px 0;
+           background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 50%, #0f1b4d 100%); }
+    .card { background: rgba(20,20,40,0.92); padding: 32px; border-radius: 14px; width: 440px;
+            border: 1px solid #5b3fd1; box-shadow: 0 0 30px rgba(110,70,230,0.45); }
+    h2 { text-align: center; margin: 0 0 6px;
+         background: linear-gradient(90deg, #a78bfa, #60a5fa);
+         -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h3 { margin: 22px 0 0; font-size: 15px; color: #a78bfa; }
+    .error { background: #3b1230; color: #ff8aa8; border: 1px solid #a8325a; padding: 10px;
+             border-radius: 8px; font-size: 13px; margin: 10px 0; text-align: center; }
+    label { display: block; margin: 12px 0 6px; font-size: 14px; color: #c7cbea; }
+    input, select { width: 100%; padding: 10px; border-radius: 8px; font-size: 14px; background: #12122a;
+                    color: #fff; border: 1px solid #3b3f78; outline: none; }
+    input::placeholder { color: #6b719c; }
+    input:focus, select:focus { border-color: #8b5cf6; box-shadow: 0 0 8px rgba(139,92,246,0.6); }
+    .row { display: flex; gap: 8px; }
+    .row > div { flex: 1; }
+    button { width: 100%; margin-top: 22px; padding: 12px; border: none; border-radius: 8px;
+             color: #fff; font-size: 16px; font-weight: bold; cursor: pointer;
+             background: linear-gradient(90deg, #7c3aed, #2563eb); }
+    .back { display: block; text-align: center; margin-top: 14px; color: #8b93b8; font-size: 13px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Create Event</h2>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+    <form method="POST" action="/create_event">
+      <label>Event Title</label>
+      <input type="text" name="title" placeholder="e.g. Python Workshop" value="{{ form.get('title', '') }}">
+      <label>Event Date (YYYY-MM-DD)</label>
+      <input type="text" name="event_date" placeholder="e.g. 2026-11-15" value="{{ form.get('event_date', '') }}">
+      <label>Venue</label>
+      <input type="text" name="venue" placeholder="e.g. Seminar Hall A" value="{{ form.get('venue', '') }}">
+      <label>Capacity (1 to 500)</label>
+      <input type="text" name="capacity" placeholder="e.g. 100" value="{{ form.get('capacity', '') }}">
+
+      <label>Event Type</label>
+      <select name="event_type">
+        <option value="">-- Select type --</option>
+        <option value="Workshop" {% if form.get('event_type') == 'Workshop' %}selected{% endif %}>Workshop</option>
+        <option value="Seminar" {% if form.get('event_type') == 'Seminar' %}selected{% endif %}>Seminar</option>
+      </select>
+      <label>Skill Level (for Workshop)</label>
+      <select name="skill_level">
+        <option value="">-- Select level --</option>
+        <option value="Beginner" {% if form.get('skill_level') == 'Beginner' %}selected{% endif %}>Beginner</option>
+        <option value="Intermediate" {% if form.get('skill_level') == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+        <option value="Advanced" {% if form.get('skill_level') == 'Advanced' %}selected{% endif %}>Advanced</option>
+      </select>
+      <label>Topic (for Seminar)</label>
+      <input type="text" name="topic" placeholder="e.g. Artificial Intelligence" value="{{ form.get('topic', '') }}">
+
+      <h3>Session 1 (required)</h3>
+      <label>Session Name</label>
+      <input type="text" name="s1_name" placeholder="e.g. Opening Talk" value="{{ form.get('s1_name', '') }}">
+      <div class="row">
+        <div><label>Start (HH:MM)</label><input type="text" name="s1_start" placeholder="10:00" value="{{ form.get('s1_start', '') }}"></div>
+        <div><label>End (HH:MM)</label><input type="text" name="s1_end" placeholder="11:30" value="{{ form.get('s1_end', '') }}"></div>
+      </div>
+
+      <h3>Session 2 (optional)</h3>
+      <label>Session Name</label>
+      <input type="text" name="s2_name" placeholder="e.g. Hands-on Lab" value="{{ form.get('s2_name', '') }}">
+      <div class="row">
+        <div><label>Start (HH:MM)</label><input type="text" name="s2_start" placeholder="12:00" value="{{ form.get('s2_start', '') }}"></div>
+        <div><label>End (HH:MM)</label><input type="text" name="s2_end" placeholder="13:00" value="{{ form.get('s2_end', '') }}"></div>
+      </div>
+
+      <button type="submit">Create Event</button>
+    </form>
+    <a class="back" href="/organizer">Back to dashboard</a>
+  </div>
+</body>
+</html>

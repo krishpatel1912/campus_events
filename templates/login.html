@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Event Management - Login</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif; margin: 0; min-height: 100vh;
+      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 50%, #0f1b4d 100%);
+    }
+    .card {
+      background: rgba(20, 20, 40, 0.92); padding: 36px; border-radius: 14px;
+      width: 360px; border: 1px solid #5b3fd1;
+      box-shadow: 0 0 30px rgba(110, 70, 230, 0.45);
+    }
+    h2 {
+      text-align: center; margin: 0 0 6px; font-size: 24px;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sub { text-align: center; color: #8b93b8; font-size: 13px; margin-bottom: 10px; }
+    .error {
+      background: #3b1230; color: #ff8aa8; border: 1px solid #a8325a;
+      padding: 10px; border-radius: 8px; font-size: 13px;
+      margin: 10px 0; text-align: center;
+    }
+    label { display: block; margin: 16px 0 6px; font-size: 14px; color: #c7cbea; }
+    input, select {
+      width: 100%; padding: 11px; border-radius: 8px; font-size: 14px;
+      background: #12122a; color: #fff; border: 1px solid #3b3f78; outline: none;
+    }
+    input::placeholder { color: #6b719c; }
+    input:focus, select:focus { border-color: #8b5cf6; box-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+    button {
+      width: 100%; margin-top: 24px; padding: 12px; border: none; border-radius: 8px;
+      color: #fff; font-size: 16px; font-weight: bold; cursor: pointer;
+      background: linear-gradient(90deg, #7c3aed, #2563eb);
+    }
+    button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Campus Event Login</h2>
+    <div class="sub">Sign in to manage and join campus events</div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="error">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/login">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="Enter username">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter password">
+      <label>Login as</label>
+      <select name="role">
+        <option value="Organizer">Organizer</option>
+        <option value="Student">Student</option>
+      </select>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>
